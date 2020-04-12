@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using System.Linq;
 using Chat_Blazor1.Server.Data;
 using Chat_Blazor1.Server.Models;
+using BlazorSignalRApp.Server.Hubs;
 
 namespace Chat_Blazor1.Server
 {
@@ -44,6 +45,7 @@ namespace Chat_Blazor1.Server
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,6 +78,7 @@ namespace Chat_Blazor1.Server
             {
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/chatHub");
                 endpoints.MapFallbackToFile("index.html");
             });
         }
